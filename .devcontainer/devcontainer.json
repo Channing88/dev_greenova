@@ -96,7 +96,11 @@
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=delegated",
     "source=dotfiles,target=/home/vscode/dotfiles,type=volume"
   ],
-
-  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode && mkdir -p /home/vscode/.local/share/fish && chmod -R 755 /home/vscode && chmod +x /workspaces/greenova/.devcontainer/post_start.sh",
-  "postStartCommand": "cd /workspaces/greenova && /bin/bash ./.devcontainer/post_start.sh"
+  "name": "Greenova Development",
+  "postCreateCommand": "sudo chown vscode:vscode /home && sudo chown vscode:vscode /usr/local && sudo chown vscode:vscode /workspaces",
+  //"postStartCommand": "bash ${containerWorkspaceFolder}/.devcontainer/post_start.sh",
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": true,
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceMount": "source=greenova,target=${containerWorkspaceFolder},type=volume"
 }
